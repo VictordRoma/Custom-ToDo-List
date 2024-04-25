@@ -1,0 +1,29 @@
+.botoes {
+    text-align: center;
+    align-items: center;
+    margin: 30px;
+}
+
+.tarefa{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.row {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+}
+
+.mb-3{
+     
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+}
