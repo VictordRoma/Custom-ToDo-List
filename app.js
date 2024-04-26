@@ -29,36 +29,58 @@ app.engine(
 );
 app.set("view engine", "handlebars")
 
+//Links para Quando o Usuário Não Está Logado
+const navbarLinksNaoLogado = [
+    { text: 'Login', url: '/' },
+    { text: 'Cadastro', url: '/register' },
+];
+
+//Links para Quando o Usuário Está Logado
+const navbarLinksLogado = [
+    { text: 'ToDo', url: '/todo' },
+    { text: 'Criar Tarefa', url: '/create' },
+    { text: 'Editar Tarefa', url: '/edit' }
+];
+
+//Todos os Links
+const navbarLinksTestes = [
+    { text: 'Login', url: '/' },
+    { text: 'Cadastro', url: '/register' },
+    { text: 'ToDo', url: '/todo' },
+    { text: 'Criar Tarefa', url: '/create' },
+    { text: 'Editar Tarefa', url: '/edit' }
+];
+
 
 
 //ROTAS
 //LOGIN
 app.get("/", (req, res) => {
-    res.render("usuario/login")
+    res.render("usuario/login", {title: "Login", header: "Login", navbarLinks: navbarLinksTestes})
 })
 
 //CADASTRO
 app.get("/register", (req, res) => {
-    res.render("usuario/register")
+    res.render("usuario/register", {title: "Cadastro", header: "Cadastro", navbarLinks: navbarLinksTestes})
 })
 
 //LISTAGEM
 app.get("/todo", (req, res) => {
-    res.render("todo")
+    res.render("todo", {title: "ToDo List", header: "ToDo List", navbarLinks: navbarLinksTestes})
 })
 
 //EDITAR TAREFA
 app.get("/edit", (req, res) => {
-    res.render("edit")
+    res.render("edit", {title: "Editar Tarefa", header: "Editar Tarefa", navbarLinks: navbarLinksTestes})
 })
 
 //CRIAR TAREFA
 app.get("/create", (req, res) => {
-    res.render("create")
+    res.render("create", {title: "Criar Tarefa", header: "Criar Tarefa", navbarLinks: navbarLinksTestes})
 })
 
 
-
+//Iniciando Servidor: localhost:8081
 app.listen(8081, function(){
     console.log("Servidor Ativo na Porta 8081!")
 })
