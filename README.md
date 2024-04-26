@@ -9,7 +9,7 @@ O projeto ainda está em desenvolvimento:
 - [ ] Delete
 
 
-> Projeto CRUD de Agendamentos com Node.js e Handlebars
+> Projeto ToDo List com Login em Node.js e Handlebars
 
 # INICIANDO PROJETO</h1>
 ### (SEMPRE CLONE DA BRANCH DE HOMOLOGAÇÃO)
@@ -63,6 +63,20 @@ Caso o projeto já exista na sua máquina e outra pessoa tiver feito alteraçõe
 git pull https://github.com/vek03/CRUD-nodejs-handlebar.git homologacao
 ```
 
+<br><br>
+
+# SUBINDO PARA UMA BRANCH EXISTENTE
+Caso você esteja editando em um PC novo e queira atualizar sua branch que JA EXISTE:
+```
+//Comece trazendo os dados da branch
+git clone -b <sua_branch> <link_repositorio>
+
+//Após editar tudo
+git add *
+git commit -m "<comentario>"
+git push origin <sua_branch>
+```
+
 <br><br><br>
 
 # DOCUMENTAÇÃO
@@ -76,4 +90,5 @@ npm i body-parser --save
 npm i @handlebars/allow-prototype-access --save
 ```
 
-- Front-End: https://handlebarsjs.com/guide/
+- Handlebars: https://handlebarsjs.com/guide/
+- Bootstrap: https://getbootstrap.com
