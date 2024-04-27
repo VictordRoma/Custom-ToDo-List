@@ -1,0 +1,37 @@
+.task-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.task-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-details {
+    flex: 1;
+}
+
+.task-buttons {
+    margin-left: 10px;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+}

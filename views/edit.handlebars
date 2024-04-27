@@ -3,26 +3,32 @@
 </head>
 
 
-<h1 class="tarefa">Edite sua Tarefa</h1>
-<h2 class="info">Informacoes da Tarefa</h2>
+ <h1 class="tarefa">Edite sua Tarefa</h1>
+    <h2 class="info">Informações da Tarefa</h2>
 
-<div class="row">
-  <div class="col">
-    <label>Nome Completo</label>
-    <input type="text" class="form-control" placeholder="Nome Completo" aria-label="First name">
-  </div>
-  <div class="col">
-    <label>Data de Conclusao Prevista</label>
-    <input type="date" class="form-control" placeholder="**/**/****" aria-label="Last name">
-  </div>
-</div>
-<br>
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Descricao</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-</div>
+   <div class="container">
+        <div class="content">
 
-<div class="botoes">
-    <button type="button" class="btn btn-primary btn-lg">Editar</button>
-    <button type="button" class="btn btn-secondary btn-lg">Cancelar</button>
-</div>
+            <div class="row">
+                <div class="col">
+                    <label for="nomeCompleto">Nome Completo</label>
+                    <input type="text" class="form-control" id="nomeCompleto" placeholder="Nome Completo" aria-label="Nome Completo">
+                </div>
+                <div class="col">
+                    <label for="dataConclusao">Data de Conclusão Prevista</label>
+                    <input type="date" class="form-control" id="dataConclusao" aria-label="Data de Conclusão Prevista">
+                </div>
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="descricao" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+
+     <div class="botoes">
+                <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='/todo'">Editar </button>
+                <button type="button" class="btn btn-secondary btn-lg" onclick="window.location.href='/view'">Cancelar</button>
+    </div>
+    </div>

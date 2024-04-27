@@ -3,9 +3,10 @@
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    
 }
 
 body * {
     box-sizing: border-box;
+    padding: 0;
 }
-
