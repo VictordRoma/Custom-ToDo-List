@@ -84,7 +84,6 @@ app.get("/view", (req, res) => {
     res.render("view", {title: "Ver tarefa", navbarLinks: navbarLinksTestes})
 })
 
-
 //Iniciando Servidor: localhost:8081
 app.listen(8081, function(){
     console.log("Servidor Ativo na Porta 8081!")
