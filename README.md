@@ -2,12 +2,9 @@
 O projeto ainda está em desenvolvimento:
 
 - [x] Estrutura
-- [ ] Front-End
-- [ ] Create
-- [ ] Read
-- [ ] Update
-- [ ] Delete
-
+- [x] Front-End
+- [ ] Login
+- [ ] CRUD Tarefas
 
 > Projeto ToDo List com Login em Node.js e Handlebars
 
@@ -15,7 +12,7 @@ O projeto ainda está em desenvolvimento:
 ### (SEMPRE CLONE DA BRANCH DE HOMOLOGAÇÃO)
 - Crie uma base de dados MySQL chamada "agendamentos_bd"
 ```
-git clone -b homologacao https://github.com/vek03/CRUD-nodejs-handlebar.git
+git clone -b homologacao <link_repositorio>
 cd <projeto>
 npm i
 npm run start
@@ -60,7 +57,7 @@ git push
 # PUXANDO AS ALTERAÇÕES DA BRANCH DE HOMOLOGAÇÃO
 Caso o projeto já exista na sua máquina e outra pessoa tiver feito alterações antes de você, execute:
 ```
-git pull https://github.com/vek03/CRUD-nodejs-handlebar.git homologacao
+git pull <link_repositorio> homologacao
 ```
 
 <br><br>
