@@ -1,0 +1,12 @@
+/* Neste arquivos css, estão o codigo fonte de todas as paginas, como a fonte por exemplo */
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    
+}
+
+body * {
+    box-sizing: border-box;
+    padding: 0;
+}

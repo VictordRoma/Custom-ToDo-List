@@ -1,0 +1,39 @@
+.container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+
+.content {
+    text-align: center;
+}
+
+.botoes {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.tarefa {
+    margin-bottom: 20px;
+    text-align: center
+}
+
+.info {
+    margin-bottom: 40px;
+    text-align: center
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.col {
+    margin: 0 10px;
+}
+
+.mb-3 {
+    margin-bottom: 20px;
+}
