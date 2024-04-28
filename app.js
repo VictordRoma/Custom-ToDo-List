@@ -48,7 +48,8 @@ const navbarLinksTestes = [
     { text: 'Cadastro', url: '/register' },
     { text: 'ToDo', url: '/todo' },
     { text: 'Criar Tarefa', url: '/create' },
-    { text: 'Editar Tarefa', url: '/edit' }
+    { text: 'Editar Tarefa', url: '/edit' },
+    { text: 'Ver Tarefa', url: '/view' }
 ];
 
 
@@ -56,29 +57,32 @@ const navbarLinksTestes = [
 //ROTAS
 //LOGIN
 app.get("/", (req, res) => {
-    res.render("usuario/login", {title: "Login", header: "Login", navbarLinks: navbarLinksTestes})
+    res.render("usuario/login", {title: "Login",  navbarLinks: navbarLinksTestes})
 })
 
 //CADASTRO
 app.get("/register", (req, res) => {
-    res.render("usuario/register", {title: "Cadastro", header: "Cadastro", navbarLinks: navbarLinksTestes})
+    res.render("usuario/register", {title: "Cadastro",  navbarLinks: navbarLinksTestes})
 })
 
 //LISTAGEM
 app.get("/todo", (req, res) => {
-    res.render("todo", {title: "ToDo List", header: "ToDo List", navbarLinks: navbarLinksTestes})
+    res.render("todo", {title: "ToDo List",  navbarLinks: navbarLinksTestes})
 })
 
 //EDITAR TAREFA
 app.get("/edit", (req, res) => {
-    res.render("edit", {title: "Editar Tarefa", header: "Editar Tarefa", navbarLinks: navbarLinksTestes})
+    res.render("edit", {title: "Editar Tarefa",  navbarLinks: navbarLinksTestes})
 })
 
 //CRIAR TAREFA
 app.get("/create", (req, res) => {
-    res.render("create", {title: "Criar Tarefa", header: "Criar Tarefa", navbarLinks: navbarLinksTestes})
+    res.render("create", {title: "Criar Tarefa", navbarLinks: navbarLinksTestes})
 })
 
+app.get("/view", (req, res) => {
+    res.render("view", {title: "Ver tarefa", navbarLinks: navbarLinksTestes})
+})
 
 //Iniciando Servidor: localhost:8081
 app.listen(8081, function(){

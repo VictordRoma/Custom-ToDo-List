@@ -1,23 +1,44 @@
-<ol class="list-group list-group-numbered">
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">Subheading</div>
-      Content for list item
+<head>
+    <link rel="stylesheet" href="/public/css/todo.css">
+</head>
+
+<div class="header-container">
+    <h1>Tarefas</h1>
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="window.location.href='./create'">
+        Criar Tarefa
+    </button>
+</div>
+
+
+<div class="task-container">
+    <div class="task-content">
+        <div class="task-details">
+            <div class="fw-bold">Nome da Tarefa</div>
+            <p>28/04/2024</p>
+        </div>
+        <div class="task-buttons">
+          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="window.location.href='./view'">
+              Visualizar
+          </button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Concluir
+            </button>
+        </div>
     </div>
-    <span class="badge text-bg-primary rounded-pill">14</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">Subheading</div>
-      Content for list item
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content">
+      <div class="modal-body">
+          Após concluir esta tarefa, você não poderá consultá-la novamente. Tem certeza de que deseja concluí-la? 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Concluir</button>
+      </div>
     </div>
-    <span class="badge text-bg-primary rounded-pill">14</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">Subheading</div>
-      Content for list item
-    </div>
-    <span class="badge text-bg-primary rounded-pill">14</span>
-  </li>
-</ol>
+  </div>
+</div>

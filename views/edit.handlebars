@@ -1,8 +1,34 @@
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Email address</label>
-  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-</div>
+<head>
+    <link rel="stylesheet" href="/public/css/edit.css">
+</head>
+
+
+ <h1 class="tarefa">Edite sua Tarefa</h1>
+    <h2 class="info">Informações da Tarefa</h2>
+
+   <div class="container">
+        <div class="content">
+
+            <div class="row">
+                <div class="col">
+                    <label for="nomeCompleto">Nome Completo</label>
+                    <input type="text" class="form-control" id="nomeCompleto" placeholder="Nome Completo" aria-label="Nome Completo">
+                </div>
+                <div class="col">
+                    <label for="dataConclusao">Data de Conclusão Prevista</label>
+                    <input type="date" class="form-control" id="dataConclusao" aria-label="Data de Conclusão Prevista">
+                </div>
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="descricao" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+
+     <div class="botoes">
+                <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='/todo'">Editar </button>
+                <button type="button" class="btn btn-secondary btn-lg" onclick="window.location.href='/view'">Cancelar</button>
+    </div>
+    </div>
