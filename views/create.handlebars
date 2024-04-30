@@ -2,30 +2,44 @@
     <link rel="stylesheet" href="/public/css/create.css">
 </head>
 
- <h1 class="tarefa">Crie sua Tarefa</h1>
-    <h2 class="info">Informações da Tarefa</h2>
+<nav class="navbar">
+  <div class="container-fluid">
+    <a href="" class="navbar-brand" style="color: #FFFFF1">Tarefas</a>
+    <a href="" class="navbar-brand" style="color: #FFFFF1">Sair</a>
+  </div>
+</nav>
 
+<div class="header-container">
+    <h1 class="tarefa">Crie sua Tarefa</h1>
+    <h2 class="info">Informações da Tarefa</h2>
+  </div>
+
+ 
    <div class="container">
         <div class="content">
-            <div class="row">
-                <div class="col">
-                    <label for="nomeCompleto">Nome Completo</label>
-                    <input type="text" class="form-control" id="nomeCompleto" placeholder="Nome Completo" aria-label="Nome Completo">
+            <form action="">
+
+                <div class="row">
+                    <div class="col">
+                        <label for="nomeCompleto" class="form-label">Nome Completo</label>
+                        <input type="text" class="form-control" id="nomeCompleto" placeholder="Nome Completo" aria-label="Nome Completo">
+                    </div>
+                    <div class="col">
+                        <label for="dataConclusao" class="form-label">Data de Conclusão Prevista</label>
+                        <input type="date" class="form-control" id="dataConclusao" aria-label="Data de Conclusão Prevista">
+                    </div>
                 </div>
-                <div class="col">
-                    <label for="dataConclusao">Data de Conclusão Prevista</label>
-                    <input type="date" class="form-control" id="dataConclusao" aria-label="Data de Conclusão Prevista">
+                <br>
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="descricao" rows="3"></textarea>
                 </div>
-            </div>
-            <br>
-            <div class="mb-3">
-                <label for="descricao" class="form-label">Descrição</label>
-                <textarea class="form-control" id="descricao" rows="3"></textarea>
-            </div>
+
+            </form>
         </div>
     </div>
 
      <div class="botoes">
                 <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='todo'">Criar</button>
-                <button type="button" class="btn btn-secondary btn-lg"  onclick="window.location.href='todo'">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-lg"  onclick="window.location.href='todo'">Cancelar</button>
     </div>
