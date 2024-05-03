@@ -3,8 +3,9 @@ O projeto ainda está em desenvolvimento:
 
 - [x] Estrutura
 - [x] Front-End
-- [ ] Login
+- [x] Login
 - [ ] CRUD Tarefas
+- [ ] Calendário
 
 > Projeto ToDo List com Login em Node.js e Handlebars
 

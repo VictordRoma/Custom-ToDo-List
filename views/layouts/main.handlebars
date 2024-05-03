@@ -7,70 +7,14 @@
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
 </head>
 <body>
-    <!-- NAVBAR -->
-    <div class="row">
-      <div class="col-12">
-        <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                {{#each navbarLinks}}
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{url}}">{{text}}</a>
-                  </li>
-                {{/each}}
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </div>
-
-    <!-- HEADER -->
-    <div class="row">
-        <div class="col">
-            <nav class="navbar bg-light">
-              <div class="container-fluid">
-                <a class="navbar-brand" href="#">{{header}}</a>
-              </div>
-            </nav>
-        </div>
-    </div>
-    
-
     <!-- Corpo da Página -->
-    <div class="row">
-      <div class="col-12">
-        <div class="body">
-          <div class="mt-10">
-            {{{body}}}
-          </div>
-        </div>
-      </div>
-    </div> 
-    
-    <!-- Rodapé -->
-    <div class="row">
-      <div class="col-12">
-        <footer class="py-3 my-4">
-          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item"><a href="https://github.com/VictordRoma/Custom-ToDo-List.git" class="nav-link px-2 text-body-secondary">Git Hub</a></li>
-          </ul>
-          <p class="text-center text-body-secondary">© 2024 Company, Inc</p>
-        </footer>
-      </div>
-    </div>
+    {{{body}}} 
 </body>
 
 <script src="/jquery/jquery.min.js"></script>
-<script src="/public/js/script.js"></script>
 <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-<script>
-  
-</script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/public/js/script.js"></script>
 </html>

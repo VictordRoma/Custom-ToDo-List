@@ -2,15 +2,30 @@
     <link rel="stylesheet" href="/public/css/view.css">
 </head>
 
+<nav class="navbar">
+  <div class="container-fluid">
+    <a href="" class="navbar-brand" style="color: #FFFFF1">Tarefas</a>
+    <a href="/logout" class="navbar-brand" style="color: #FFFFF1">Sair</a>
+  </div>
+</nav>
+
 
     <div class="task-container">
+        <div class="back-button">
+            <a href="/todo"><ion-icon name="arrow-back-outline"></ion-icon></a>
+        </div>
         <div class="task-details">
-            <h2>Tarefa 1</h2>
+            <div class="row">
+                <div class="col">
+                    <h2>Tarefa 1</h2>
+                </div>
+                <div class="edit-button">
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='edit'">Editar</button>
+                </div>
+            </div>
             <p>Data: 27 de abril de 2024</p>
-            <p>Descrição: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at eros et mauris fermentum elementum.</p>
+            <p>Descrição: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus nullam. Risus ultricies tristique nulla aliquet enim tortor at. A pellentesque sit amet porttitor eget dolor morbi non arcu. Rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt. Sit amet facilisis magna etiam tempor orci eu lobortis. Quisque id diam vel quam elementum pulvinar. Dictum sit amet justo donec enim diam. Magna sit amet purus gravida quis blandit. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras.</p>
         </div>
-        <div class="edit-button">
-            <button type="button" onclick="window.location.href='edit'">Editar</button>
-        </div>
+        
     </div>
 
