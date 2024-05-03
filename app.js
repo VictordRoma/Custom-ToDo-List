@@ -8,6 +8,7 @@ var Task = require(__dirname + '/models/Task.js');
 var User = require(__dirname + '/models/User.js');
 const handlebars = require("express-handlebars").engine;
 const notifier = require('node-notifier');
+const post = require("./models/Task")
 
 //Iniciando Bibliotecas
 const app = express();
@@ -173,19 +174,36 @@ app.get("/todo", (req, res) => {
     if (!req.session.user) {
         return res.render("errors/erro", {error: "403", textError: 'Você não tem permissão para acessar essa página!'});
     }
-
-    return res.render("todo", {title: "ToDo List",  navbarLinks: navbarLinksTestes});
+    post.findAll({where: {status: "Incompleta"}}).then(function(post){
+        return res.render("todo", {post, navbarLinks: navbarLinksTestes})
+    }).catch(function(erro){
+        console.log("Erro ao carregar dados do banco: " + erro)
+    })    
 });
 
-
+//COMPLETAR
+app.get("/completar/:id", function(req, res){
+    post.update({
+        status: "Completa"
+    },{
+        where: {
+            'id': req.params.id
+        }
+    }).then(function(){
+        res.redirect("/todo")
+    })
+})
 
 //VIEW EDITAR TAREFA
-app.get("/edit", (req, res) => {
+app.get("/edit/:id", (req, res) => {
     if (!req.session.user) {
         return res.render("errors/erro", {error: "403", textError: 'Você não tem permissão para acessar essa página!'});
     }
-
-    return res.render("edit", {title: "Editar Tarefa",  navbarLinks: navbarLinksTestes});
+    post.findAll({where: {'id': req.params.id}}).then(function(post){
+        return res.render("edit", {post, navbarLinks: navbarLinksTestes})
+    }).catch(function(erro){
+        console.log("Erro ao carregar dados do banco: " + erro)
+    })
 });
 
 
@@ -199,14 +217,46 @@ app.get("/create", (req, res) => {
     return res.render("create", {title: "Criar Tarefa", navbarLinks: navbarLinksTestes});
 });
 
+//CREATE TAREFA
+app.post("/cadastrar", function(req, res){
+    post.create({
+        title: req.body.nomeTarefa,
+        due: req.body.dataConclusao,
+        description: req.body.descricao,
+        class: req.body.nomeMateria,
+        status: "Incompleta"
+    }).then(function(){
+        res.redirect("/")
+    }).catch(function(erro){
+        res.send("Falha ao cadastrar os dados: " + erro)
+    })
+})
+
+app.post("/atualizar", function(req, res){
+    post.update({
+        title: req.body.nomeTarefa,
+        due: req.body.dataConclusao,
+        description: req.body.descricao,
+        class: req.body.nomeMateria
+    },{
+        where: {
+            id: req.body.id
+        }
+    }).then(function(){
+        res.redirect("./todo")
+    })
+})
 
 //VIEW VISUALIZAR TAREFA
-app.get("/view", (req, res) => {
+app.get("/view/:id", (req, res) => {
     if (!req.session.user) {
         return res.render("errors/erro", {error: "403", textError: 'Você não tem permissão para acessar essa página!'});
     }
-
-    return res.render("view", {title: "Ver tarefa", navbarLinks: navbarLinksTestes});
+    post.findAll({where: {'id': req.params.id}}).then(function(post){
+        return res.render("view", {post, navbarLinks: navbarLinksTestes})
+    }).catch(function(erro){
+        console.log("Erro ao carregar dados do banco: " + erro)
+    })
 });
 
 
