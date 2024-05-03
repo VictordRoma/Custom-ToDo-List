@@ -17,29 +17,35 @@
  
    <div class="container">
         <div class="content">
-            <form action="">
+            <form action="/cadastrar" method="post" >
 
                 <div class="row">
                     <div class="col">
-                        <label for="nomeCompleto" class="form-label">Nome Completo</label>
-                        <input type="text" class="form-control" id="nomeCompleto" placeholder="Nome Completo" aria-label="Nome Completo">
+                        <label for="nomeCompleto" class="form-label">Nome da tarefa</label>
+                        <input type="text" class="form-control" name="nomeTarefa" id="nomeTarefa" placeholder="Nome da Tarefa" aria-label="Nome da Tarefa">
                     </div>
                     <div class="col">
                         <label for="dataConclusao" class="form-label">Data de Conclusão Prevista</label>
-                        <input type="date" class="form-control" id="dataConclusao" aria-label="Data de Conclusão Prevista">
+                        <input type="date" class="form-control" name="dataConclusao" id="dataConclusao" aria-label="Data de Conclusão Prevista">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="Materia" class="form-label">Materia</label>
+                        <input type="text" class="form-control" name="nomeMateria" id="nomeMateria" placeholder="Nome da Materia" aria-label="Nome da Materia">
                     </div>
                 </div>
                 <br>
                 <div class="mb-3">
                     <label for="descricao" class="form-label">Descrição</label>
-                    <textarea class="form-control" id="descricao" rows="3"></textarea>
+                    <textarea class="form-control" name="descricao" id="descricao" rows="3"></textarea>
                 </div>
-
+                <div class="botoes">
+                    <button  type="submit" class="btn btn-primary btn-lg">Criar</button>
+                    <button  type="button" class="btn btn-primary btn-lg" onclick="window.location.href='/todo'" >Cancelar</button>
+                </div>
             </form>
         </div>
     </div>
 
-     <div class="botoes">
-                <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='todo'">Criar</button>
-                <button type="button" class="btn btn-primary btn-lg"  onclick="window.location.href='todo'">Cancelar</button>
-    </div>
+     

@@ -4,35 +4,38 @@
 
 <nav class="navbar">
   <div class="container-fluid">
-    <a href="" class="navbar-brand" style="color: #FFFFF1">Tarefas</a>
+    <a href class="navbar-brand" style="color: #FFFFF1">Tarefas</a>
     <a href="/logout" class="navbar-brand" style="color: #FFFFF1">Sair</a>
   </div>
 </nav>
 
-
 <div class="container">
   <div class="header-container">
     <h1>Minhas Tarefas</h1>
-    <button type="button" class="btn btn-primary btnplus" data-bs-toggle="modal" data-bs-target="#editarModal"
+    <button type="button" class="btn btn-primary btnplus" data-bs-toggle="modal"
+      data-bs-target="#editarModal"
       onclick="window.location.href='./create'">
       <span class="spn">+</span>
     </button>
   </div>
 
-
+  {{#each post}}
+  {{#dataValues}}
   <div class="container">
     <div class="task-container">
       <div class="task-content">
         <div class="task-details">
-          <div class="fw-bold">Nome da Tarefa</div>
-          <p>28/04/2024</p>
+          <div class="fw-bold">{{title}}</div>
+          <p>{{due}}</p>
         </div>
         <div class="task-buttons">
-          <button type="button" class="btn btn-primary btnview" data-bs-toggle="modal" data-bs-target="#editarModal"
-            onclick="window.location.href='./view'">
-            Visualizar
+          <button type="button" class="btn btn-primary btnview"
+            data-bs-toggle="modal" data-bs-target="#editarModal">
+            <a href="/view/{{id}}" style="color:inherit">Visualizar</a>
+
           </button>
-          <button type="button" class="btn btn-primary btnconcluir" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button type="button" class="btn btn-primary btnconcluir"
+            data-bs-toggle="modal" data-bs-target="#exampleModal">
             Concluir
           </button>
         </div>
@@ -41,19 +44,26 @@
   </div>
 </div>
 
-<!-- Modal -->
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body"><p>
-        Após concluir esta tarefa, você não poderá consultá-la novamente. Tem certeza de que deseja concluí-la?
+          Após concluir esta tarefa, você não poderá consultá-la novamente. Tem
+          certeza de que deseja concluí-la?
         </p>
-        
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary btnconcluir" data-bs-dismiss="modal">Concluir</button>
+        <button type="submit" class="btn btn-primary btnconcluir"
+          data-bs-dismiss="modal"><a href="/completar/{{id}}"
+            style="color:inherit">Concluir</a></button>
       </div>
     </div>
   </div>
 </div>
+
+{{/dataValues}}
+{{/each}}
+
+<!-- Modal -->
