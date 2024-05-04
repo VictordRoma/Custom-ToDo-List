@@ -2,24 +2,23 @@
     <link rel="stylesheet" href="/public/css/edit.css">
 </head>
 
-
- <nav class="navbar">
+<nav class="navbar">
   <div class="container-fluid">
-    <a href="" class="navbar-brand" style="color: #FFFFF1">Tarefas</a>
-    <a href="/logout" class="navbar-brand" style="color: #FFFFF1">Sair</a>
+    <a href="/todo" class="navbar-brand a">ToDo List</a>
+    <a onclick="sair()" class="navbar-brand a">Sair</a>
   </div>
 </nav>
 
 <div class="header-container">
     <h1 class="tarefa">Edite sua Tarefa</h1>
     <h2 class="info">Informações da Tarefa</h2>
-  </div>
+</div>
 
  
-   <div class="container">
-        <div class="content">
-            {{#each post}}
-                    {{#dataValues}}
+<div class="container">
+    <div class="content">
+        {{#each task}}
+        {{#dataValues}}
             <form method="post" action="/atualizar">
 
                 <div class="row">
@@ -45,15 +44,13 @@
                     <textarea class="form-control" name="descricao" id="descricao" rows="3">{{description}}</textarea>
                 </div>
 
-                 <div class="botoes">
-                <button type="submit" class="btn btn-primary btn-lg">Editar</button>
-                <button type="button" class="btn btn-primary btn-lg"  onclick="window.location.href='/todo'">Cancelar</button>
-    </div>
+                <div class="botoes">
+                    <button type="submit" class="btn btn-primary btn-lg">Editar</button>
+                    <button type="button" class="btn btn-primary btn-lg"  onclick="window.location.href='/todo'">Cancelar</button>
+                </div>
 
             </form>
-            {{/dataValues}}
-                {{/each}}
-        </div>
+        {{/dataValues}}
+        {{/each}}
     </div>
-
-    
+</div>

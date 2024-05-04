@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../server/database.js');
+const User = require('./User.js');
 
 const Task = sequelize.define('tasks',{
     title:{
@@ -7,8 +8,12 @@ const Task = sequelize.define('tasks',{
         allowNull: false,
     },
     due:{
-        type: Sequelize.STRING,
+        type: Sequelize.DATEONLY,
         allowNull: false,
+    },
+    conclusion:{
+        type: Sequelize.DATEONLY,
+        allowNull: true,
     },
     description:{
         type: Sequelize.STRING,
@@ -23,6 +28,8 @@ const Task = sequelize.define('tasks',{
         allowNull: false,
     },
 });
+
+Task.belongsTo(User);
 
 Task.sync();
 
