@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const {allowInsecurePrototypeAccess,} = require("@handlebars/allow-prototype-access");
 const Handlebars = require("handlebars");
-var Task = require(__dirname + '/models/Task.js');
+var Task = require("./models/Task")
 var User = require(__dirname + '/models/User.js');
 const handlebars = require("express-handlebars").engine;
 const notifier = require('node-notifier');
@@ -40,31 +40,6 @@ app.set("view engine", "handlebars");
 
 
 
-//Links para Quando o Usuário Não Está Logado
-const navbarLinksNaoLogado = [
-    { text: 'Login', url: '/' },
-    { text: 'Cadastro', url: '/register' },
-];
-
-//Links para Quando o Usuário Está Logado
-const navbarLinksLogado = [
-    { text: 'ToDo', url: '/todo' },
-    { text: 'Criar Tarefa', url: '/create' },
-    { text: 'Editar Tarefa', url: '/edit' }
-];
-
-//Todos os Links
-const navbarLinksTestes = [
-    { text: 'Login', url: '/' },
-    { text: 'Cadastro', url: '/register' },
-    { text: 'ToDo', url: '/todo' },
-    { text: 'Criar Tarefa', url: '/create' },
-    { text: 'Editar Tarefa', url: '/edit' },
-    { text: 'Ver Tarefa', url: '/view' }
-];
-
-
-
 //ROTAS
 //VIEW LOGIN
 app.get("/", (req, res) => {
@@ -72,11 +47,11 @@ app.get("/", (req, res) => {
         return res.redirect("/todo");
     }
 
-    return res.render("user/login", {title: "Login", a: 'as'});
+    return res.render("user/login", {title: "Login"});
 });
 
 //LOGAR
-app.post('/login', async (req, res) => {
+app.post('/login', async(req, res) => {
     if (req.session.user) {
         return res.redirect("/todo");
     }
@@ -85,44 +60,24 @@ app.post('/login', async (req, res) => {
     const user = await User.findOne({ where: { username } });
 
     if (!user || !await user.validPassword(password)) {
-        notifier.notify({
-            title: 'Erro!',
-            message: 'Credenciais Incorretas!',
-            sound: false,
-            wait: true
-        })
+        req.session.error = 'Credenciais Incorretas!';
 
         return res.redirect("/");
     }
 
-    req.session.user = user;
+    req.session.user = user.id;
 
-    notifier.notify({
-        title: 'Logado!',
-        message: 'Você foi Logado com Sucesso!',
-        sound: false,
-        wait: true
-    })
+    req.session.success = 'Você entrou na sua conta!';
 
     return res.redirect("/todo");
 });
 
 //DESLOGAR
 app.get("/logout", (req, res) => {
-    req.session.destroy((e) => {
-        if (e) {
-            return res.redirect("/todo");
-        }
+    delete req.session.user;
 
-        notifier.notify({
-            title: 'Deslogado!',
-            message: 'Você foi deslogado do sistema!',
-            sound: false,
-            wait: true
-        })
-
-        return res.redirect("/");
-    });
+    req.session.success = 'Você foi Deslogado!';
+    return res.redirect("/");
 });
 
 
@@ -133,35 +88,33 @@ app.get("/register", (req, res) => {
         return res.redirect("/todo");
     }
 
-    return res.render("user/register", {title: "Cadastro",  navbarLinks: navbarLinksTestes});
+    return res.render("user/register", {title: "Cadastro"});
 });
 
 //CADASTRAR USUÁRIO
-app.post('/register', async (req, res) => {
+app.post('/register', async(req, res) => {
     if (req.session.user) {
         return res.redirect("/todo");
     }
 
     const { username, password } = req.body;
-    try {
-        const newUser = await User.create({ username, password });
-        req.session.user = newUser;
 
-        notifier.notify({
-            title: 'Cadastrado!',
-            message: 'Você foi Cadastrado com Sucesso!',
-            sound: false,
-            wait: true
-        })
+    var existingUser = await User.findOne({where: {'username': username}})
+
+    if (!!existingUser) {
+        req.session.error = 'Já existe um Usuário com essa credencial!';
+
+        return res.redirect("/register");
+    }
+
+    try {
+        var user = await User.create({ username, password });
+        req.session.user = user.id;
+        req.session.success = 'Usuario Criado e Logado!';
 
         return res.redirect("/todo");
     } catch (error) {
-        notifier.notify({
-            title: 'Erro!',
-            message: 'Ocorreu um Erro ao criar Usuário!',
-            sound: false,
-            wait: true
-        })
+        req.session.error = 'Ocorreu um erro ao criar Usuário!';
         return res.redirect("/register");
     }
 });
@@ -169,23 +122,71 @@ app.post('/register', async (req, res) => {
 
 
 //LISTAGEM
-app.get("/todo", (req, res) => {
+app.get("/todo", async(req, res) => {
     if (!req.session.user) {
         return res.render("errors/erro", {error: "403", textError: 'Você não tem permissão para acessar essa página!'});
     }
 
-    return res.render("todo", {title: "ToDo List",  navbarLinks: navbarLinksTestes});
+    try{
+        var tasksConcluidos = await Task.findAll({where: {status: "Concluida", userId: req.session.user}, order: [['due', 'ASC']]});
+        var tasksPendentes = await Task.findAll({where: {status: "Pendente", userId: req.session.user}, order: [['due', 'ASC']]});
+        return res.render("todo", {tasksConcluidos, tasksPendentes, title: "Todo List"})
+    }catch(e){
+        req.session.error = 'Ocorreu um erro!';
+        return res.redirect("/todo");
+    }
 });
 
+//COMPLETAR
+app.get("/completar/:id", async(req, res) => {
+    await Task.update({
+        status: "Concluida",
+        conclusion: new Date()
+    },{
+        where: {
+            'id': req.params.id,
+            'userId': req.session.user
+        }
+    }).then(function(){
+        req.session.success = 'Tarefa Concluída!';
+        res.redirect("/todo")
+    }).catch(function(erro){
+        req.session.error = 'Ocorreu um erro!';
+        return res.redirect("/todo");
+    })
+})
 
+//DESFAZER
+app.get("/desfazer/:id", async(req, res) => {
+    await Task.update({
+        status: "Pendente",
+        conclusion: null
+    },{
+        where: {
+            'id': req.params.id,
+            'userId': req.session.user
+        }
+    }).then(function(){
+        req.session.success = 'Tarefa Desfeita!';
+        res.redirect("/todo")
+    }).catch(function(erro){
+        req.session.error = 'Ocorreu um erro!';
+        return res.redirect("/todo");
+    })
+})
 
 //VIEW EDITAR TAREFA
-app.get("/edit", (req, res) => {
+app.get("/edit/:id", async(req, res) => {
     if (!req.session.user) {
         return res.render("errors/erro", {error: "403", textError: 'Você não tem permissão para acessar essa página!'});
     }
 
-    return res.render("edit", {title: "Editar Tarefa",  navbarLinks: navbarLinksTestes});
+    await Task.findAll({where: {'id': req.params.id, 'userId': req.session.user}}).then(function(task){
+        return res.render("edit", {task, title: "Editar Tarefa"})
+    }).catch(function(erro){
+        req.session.error = 'Ocorreu um erro!';
+        return res.redirect("/todo");
+    })
 });
 
 
@@ -196,28 +197,94 @@ app.get("/create", (req, res) => {
         return res.render("errors/erro", {error: "403", textError: 'Você não tem permissão para acessar essa página!'});
     }
 
-    return res.render("create", {title: "Criar Tarefa", navbarLinks: navbarLinksTestes});
+    return res.render("create", {title: "Criar Tarefa"});
 });
 
+//CREATE TAREFA
+app.post("/cadastrar", async(req, res) => {
+    await Task.create({
+        title: req.body.nomeTarefa,
+        due: req.body.dataConclusao,
+        description: req.body.descricao,
+        class: req.body.nomeMateria,
+        status: "Pendente",
+        userId: req.session.user
+    }).then(function(task){
+        req.session.success = 'Tarefa Criada!';
+        res.redirect("/todo")
+    }).catch(function(erro){
+        req.session.error = 'Ocorreu um erro!';
+        return res.redirect("/todo");
+    })
+})
+
+app.post("/atualizar", async(req, res) => {
+    await Task.update({
+        title: req.body.nomeTarefa,
+        due: req.body.dataConclusao,
+        description: req.body.descricao,
+        class: req.body.nomeMateria
+    },{
+        where: {
+            id: req.body.id,
+            userId: req.session.user
+        }
+    }).then(function(){
+        req.session.success = 'Tarefa Atualizada!';
+        res.redirect("/todo")
+    }).catch(function(erro){
+        req.session.error = 'Ocorreu um erro!';
+        return res.redirect("/todo");
+    })
+})
 
 //VIEW VISUALIZAR TAREFA
-app.get("/view", (req, res) => {
+app.get("/view/:id", async(req, res) => {
     if (!req.session.user) {
         return res.render("errors/erro", {error: "403", textError: 'Você não tem permissão para acessar essa página!'});
     }
 
-    return res.render("view", {title: "Ver tarefa", navbarLinks: navbarLinksTestes});
+    await Task.findAll({where: {'id': req.params.id, 'userId': req.session.user}}).then(function(task){
+        return res.render("view", {task, title: "Visualizar Tarefa"})
+    }).catch(function(erro){
+        req.session.error = 'Ocorreu um erro!';
+        return res.redirect("/todo");
+    })
 });
 
 
 
-app.use(function (req, res, next) {
+app.get('/getError', (req, res) => {
+    const error = req.session.error;
+    delete req.session.error; // Limpar a sessão após usar
+
+    if (error) {
+        res.json({ error });
+    } else {
+        res.json({});
+    }
+});
+
+app.get('/getSuccess', (req, res) => {
+    const success = req.session.success;
+    delete req.session.success; // Limpar a sessão após usar
+
+    if (success) {
+        res.json({ success });
+    } else {
+        res.json({});
+    }
+});
+
+
+
+app.use((req, res) => {
     return res.render("errors/erro", {error: "404", textError: 'Página Inexistente!'});
 })
 
 
 
 //Iniciando Servidor: localhost:8081
-app.listen(8081, function(){
+app.listen(8081, () => {
     console.log("Servidor Ativo na Porta 8081!");
 });
