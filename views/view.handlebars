@@ -4,13 +4,13 @@
 
 <nav class="navbar">
   <div class="container-fluid">
-    <a href="" class="navbar-brand" style="color: #FFFFF1">Tarefas</a>
-    <a href="/logout" class="navbar-brand" style="color: #FFFFF1">Sair</a>
+    <a href="/todo" class="navbar-brand a">ToDo List</a>
+    <a onclick="sair()" class="navbar-brand a">Sair</a>
   </div>
 </nav>
 
-{{#each post}}
-                    {{#dataValues}}
+{{#each task}}
+{{#dataValues}}
     <div class="task-container">
         <div class="back-button">
             <a href="/todo"><ion-icon name="arrow-back-outline"></ion-icon></a>
@@ -21,14 +21,18 @@
                     <h2>{{title}}</h2>
                 </div>
                 <div class="edit-button">
-                    <button type="button" class="btn btn-primary"><a href="/edit/{{id}}" style="color:inherit">Editar</a></button>
+                    <a href="/edit/{{id}}" style="color:inherit">
+                        <button type="button" class="btn btn-primary">
+                            Editar
+                        </button>
+                    </a>
                 </div>
             </div>
-            <p>Data: {{due}}</p>
+            <p>Vencimento: {{due}}</p>
+            <p>Matéria: {{class}}</p>
+            <p>Situação: {{status}}</p>
             <p>Descrição: {{description}}</p>
         </div>
-        
     </div>
-     {{/dataValues}}
-                {{/each}}
-
+{{/dataValues}}
+{{/each}}
