@@ -4,7 +4,7 @@ O projeto ainda está em desenvolvimento:
 - [x] Estrutura
 - [x] Front-End
 - [x] Login
-- [ ] CRUD Tarefas
+- [x] CRUD Tarefas
 - [ ] Calendário
 
 > Projeto ToDo List com Login em Node.js e Handlebars
@@ -85,6 +85,8 @@ npm i sequelize --save
 npm i mysql2 --save
 npm i nodemon --save-dev
 npm i body-parser --save
+npm i bootstrap --save
+npm i jquery --save
 npm i @handlebars/allow-prototype-access --save
 ```
 
