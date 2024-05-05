@@ -9,9 +9,7 @@ body{
 
 .spn{
     font-size: 20px;
-    margin-bottom: 50%;
 }
-
 
 
 .btnplus{
@@ -108,4 +106,10 @@ body{
 
 .modal-body p{
     font-size: 26px;
+}
+
+@media (max-width: 768px) {
+    .calendar {
+        display: none;
+    }
 }
