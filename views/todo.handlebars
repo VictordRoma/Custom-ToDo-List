@@ -1,5 +1,14 @@
 <head>
   <link rel="stylesheet" href="/public/css/todo.css">
+
+  <script>
+  var alltasks = {{{alltasksJson}}};
+  </script>
+  
+  <script src="/fullcalendar/index.global.js"></script>
+  <script src="/@fullcalendar/bootstrap5/index.global.js"></script>
+  <script src="/@fullcalendar/core/locales/pt-br.global.js"></script>
+  <script src="/public/js/calendar.js"></script>
 </head>
 
 <nav class="navbar">
@@ -38,7 +47,7 @@
             <p>{{due}}</p>
           </div>
           <div class="task-buttons">
-            <a href="/view/{{id}}" style="color:inherit">
+            <a href="/view/{{id}}">
               <button type="button" class="btn btn-primary btnview">
                 Visualizar
               </button>
@@ -84,4 +93,8 @@
       {{/each}}
     </div>
   </div>
+
+
+  <div class="calendar" id="calendar"></div>
+
 </div>

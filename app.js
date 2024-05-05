@@ -27,6 +27,8 @@ app.use(bodyParser.json());
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use('/public', express.static('public'));
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
+app.use('/fullcalendar', express.static(__dirname + '/node_modules/fullcalendar-scheduler'));
+app.use('/@fullcalendar', express.static(__dirname + '/node_modules/@fullcalendar'));
 
 //Definindo layout das páginas
 app.engine(
@@ -130,7 +132,9 @@ app.get("/todo", async(req, res) => {
     try{
         var tasksConcluidos = await Task.findAll({where: {status: "Concluida", userId: req.session.user}, order: [['due', 'ASC']]});
         var tasksPendentes = await Task.findAll({where: {status: "Pendente", userId: req.session.user}, order: [['due', 'ASC']]});
-        return res.render("todo", {tasksConcluidos, tasksPendentes, title: "Todo List"})
+        var alltasks = await Task.findAll({where: {userId: req.session.user}, order: [['due', 'ASC']]});
+        const alltasksJson = JSON.stringify(alltasks);
+        return res.render("todo", {tasksConcluidos, tasksPendentes, alltasksJson, title: "Todo List"})
     }catch(e){
         req.session.error = 'Ocorreu um erro!';
         return res.redirect("/todo");
