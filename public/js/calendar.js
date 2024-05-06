@@ -1,6 +1,8 @@
-
-
 document.addEventListener("DOMContentLoaded", function () {
+  calendar(pendentes);
+});
+
+function calendar(tasks){
   var calendarEl = document.getElementById("calendar");
   var calendar = new FullCalendar.Calendar(calendarEl, {
     schedulerLicenseKey: "CC-Attribution-NonCommercial-NoDerivatives",
@@ -12,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
       center: "title",
       right: "resourceTimeGridDay,resourceTimeGridWeek,dayGridMonth",
     },
-    events: alltasks.map((element) => ({
+    events: tasks.map((element) => ({
       title: element.title,
       start: element.due,
       end: element.due,
@@ -26,4 +28,4 @@ document.addEventListener("DOMContentLoaded", function () {
     nowIndicator: true,
   });
   calendar.render();
-});
+}

@@ -2,7 +2,8 @@
   <link rel="stylesheet" href="/public/css/todo.css">
 
   <script>
-  var alltasks = {{{alltasksJson}}};
+    var pendentes = {{{tasksPendentesJson}}};
+    var concluidas = {{{tasksConcluidasJson}}};
   </script>
   
   <script src="/fullcalendar/index.global.js"></script>
@@ -29,10 +30,10 @@
   </div>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="pendents-tab" data-bs-toggle="tab" data-bs-target="#pendents" type="button" role="tab" aria-controls="pendents" aria-selected="true">Pendentes</button>
+      <button  onclick="calendar(pendentes)" class="nav-link active" id="pendents-tab" data-bs-toggle="tab" data-bs-target="#pendents" type="button" role="tab" aria-controls="pendents" aria-selected="true">Pendentes</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="completes-tab" data-bs-toggle="tab" data-bs-target="#completes" type="button" role="tab" aria-controls="completes" aria-selected="false">Concluídas</button>
+      <button  onclick="calendar(concluidas)" class="nav-link" id="completes-tab" data-bs-toggle="tab" data-bs-target="#completes" type="button" role="tab" aria-controls="completes" aria-selected="false">Concluídas</button>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
@@ -66,7 +67,7 @@
 
     <div class="tab-pane fade" id="completes" role="tabpanel" aria-labelledby="completes-tab">
       <br>
-      {{#each tasksConcluidos}}
+      {{#each tasksConcluidas}}
       {{#dataValues}}
       <div class="task-container">
         <div class="task-content">

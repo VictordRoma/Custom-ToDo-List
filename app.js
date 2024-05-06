@@ -130,11 +130,11 @@ app.get("/todo", async(req, res) => {
     }
 
     try{
-        var tasksConcluidos = await Task.findAll({where: {status: "Concluida", userId: req.session.user}, order: [['due', 'ASC']]});
+        var tasksConcluidas = await Task.findAll({where: {status: "Concluida", userId: req.session.user}, order: [['due', 'ASC']]});
         var tasksPendentes = await Task.findAll({where: {status: "Pendente", userId: req.session.user}, order: [['due', 'ASC']]});
-        var alltasks = await Task.findAll({where: {userId: req.session.user}, order: [['due', 'ASC']]});
-        const alltasksJson = JSON.stringify(alltasks);
-        return res.render("todo", {tasksConcluidos, tasksPendentes, alltasksJson, title: "Todo List"})
+        const tasksConcluidasJson = JSON.stringify(tasksConcluidas);
+        const tasksPendentesJson = JSON.stringify(tasksPendentes);
+        return res.render("todo", {tasksConcluidas, tasksPendentes, tasksConcluidasJson, tasksPendentesJson, title: "Todo List"})
     }catch(e){
         req.session.error = 'Ocorreu um erro!';
         return res.redirect("/todo");
