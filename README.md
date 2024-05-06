@@ -1,11 +1,11 @@
 # ETAPAS
-O projeto ainda está em desenvolvimento:
+O projeto ainda está finalizado:
 
 - [x] Estrutura
 - [x] Front-End
 - [x] Login
 - [x] CRUD Tarefas
-- [ ] Calendário
+- [x] Calendário
 
 > Projeto ToDo List com Login em Node.js e Handlebars
 
@@ -35,8 +35,7 @@ npm run start
 > SUBINDO SUAS ALTERAÇÕES PARA O GITHUB
 ## PRIMEIRA VEZ (quando ainda não existir a sua branch):
 ```
-git branch <seu_nome>
-git checkout <seu_nome>
+git checkout -b <seu_nome>
 git add *
 git commit -m "<seu_comentario>"
 git push -u origin <seu_nome>
@@ -47,9 +46,10 @@ git push -u origin <seu_nome>
 
 ## OUTRAS VEZES
 ```
+git checkout -b <seu_nome>
 git add *
 git commit -m "<seu_comentario>"
-git push
+git push origin <seu_nome>
 ```
 - pull request pelo site do Github da sua branch para a branch de homologação
 
